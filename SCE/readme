@@ -1,0 +1,5 @@
+## SCE, Simple Command Executor
+# this example is established to illustrates the test/sequence reusable methodology.
+# By using this methodology, we can simply porting the BLOCK level tests, sequences, and env
+# to SoC level.
+#

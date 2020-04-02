@@ -1,0 +1,7 @@
+## SCE, consists of fetcher, decoder, and executor, is exclusively designed for representing the
+## test/env reusable methodology
+## it supports only 2 commands for now, but can be easily expended by adding different executors
+##
+## Besides, as a verifier, the dut module was also created by systemverilog and it may not be
+## synthesizable.
+##
