@@ -1,0 +1,5 @@
+../dut/sce_define.sv
+../dut/sce_dec_if.sv
+../dut/sce_fetch_if.sv
+../dut/sce_pcr_if.sv
+../dut/sce_fetcher.sv

@@ -1,22 +1,33 @@
 // ******************************************************************************************
-// File         : fetch_seqr.svh
+// File         : top_env.svh
 // Author       : Ryan
-// Creating Date: Thu Apr  2 20:13:48 2020
+// Creating Date: Fri Apr  3 08:43:08 2020
 // Claim        : only the author can comment without a signature preffixed by ', that
 // means anyone else want to change the code must comments with '.
 // ******************************************************************************************
 
-`ifndef fetch_seqr__svh
-`define fetch_seqr__svh
+`ifndef top_env__svh
+`define top_env__svh
 
 
-class fetch_seqr extends uvm_sequencer #(fetch_seq_item); // {
+class top_env extends uvm_env; // {
 
-	`uvm_component_utils(fetch_seqr)
 
-	function new (string name = "fetch_seqr", uvm_component parent = null);
+	fetch_agt m_agt;
+
+	`uvm_component_utils(top_env)
+
+
+	function new (string name = "top_env", uvm_component parent = null);
 		super.new(name,parent);
 	endfunction
+
+	function void build_phase (uvm_phase phase); // {
+		super.build_phase(phase);
+
+		m_agt = fetch_agt::type_id::create("m_agt",this);
+	endfunction // }
+
 
 endclass // }
 

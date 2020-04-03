@@ -49,7 +49,7 @@ module sce_fetcher (sce_pcr_if PIF, sce_fetch_if FIF, sce_dec_if DIF); // {
 // 	end // }
 // end // }
 
-	process main_thread = new;
+	process main_thread;
 
 	/***********************/
 	/* METHODS DECLARATION */
@@ -60,8 +60,8 @@ module sce_fetcher (sce_pcr_if PIF, sce_fetch_if FIF, sce_dec_if DIF); // {
 	// main process
 	task reset(); // {{{
 		forever begin // {
-			wait (~PIF.RSTN);
-			if (main_thread.status() != FINISHED) begin // {
+			wait (PIF.RSTN === 1'b0);
+			if (main_thread.status() != process::FINISHED) begin // {
 				if (debug_enable)
 					$display($realtime," [SCE_FETCHER], detecting reset event");
 				// kill thread and then initial all signals
@@ -72,7 +72,7 @@ module sce_fetcher (sce_pcr_if PIF, sce_fetch_if FIF, sce_dec_if DIF); // {
 			r_PC = 'h0;
 			FIF.REQ_VLD  = 1'b0;
 			FIF.REQ_INFO = 'h0;
-			wait (PFI.RSTN); // wait signal valid
+			wait (PIF.RSTN === 1'b1); // wait signal valid
 		end // }
 	endtask // }}}
 
@@ -103,9 +103,9 @@ module sce_fetcher (sce_pcr_if PIF, sce_fetch_if FIF, sce_dec_if DIF); // {
 		// receiving feature
 		// when RSP_VLD,
 		forever begin // {
-			@(posedge FIF.CLK);
+			@(posedge PIF.CLK);
 			if (FIF.RSP_VLD) begin // {
-				fifo.push(FIF.RSP_INFO);
+				fifo.push_back(FIF.RSP_INFO);
 				FIF.RSP_ACK <= 1'b1;
 			end // }
 		end // }
@@ -133,7 +133,7 @@ module sce_fetcher (sce_pcr_if PIF, sce_fetch_if FIF, sce_dec_if DIF); // {
 		fork // {
 			reset();
 			begin // {
-				wait (PFI.RSTN); // wait reset invalid
+				wait (PIF.RSTN === 1'b1); // wait reset invalid
 				main_thread = process::self();
 				main_proc();
 			end // }

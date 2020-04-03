@@ -1,0 +1,2 @@
+-f dut.list
+-f verif.list

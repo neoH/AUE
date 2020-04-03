@@ -1,0 +1,9 @@
+-incdir $UVM_HOME/sv/src/
+$UVM_HOME/sv/src/dpi/uvm_dpi.cc
+$UVM_HOME/sv/src/uvm.sv
+-incdir ../verif/fetcher/component/fetch_agt
+../verif/fetcher/component/fetch_agt/fetch_pkg.sv
+
+../verif/fetcher/env/head_import.svh
+../verif/fetcher/env/top_env.svh
+../verif/fetcher/test/fetch_base_test.svh
