@@ -28,7 +28,10 @@ class fetch_base_test extends uvm_test; // {
 		m_env = top_env::type_id::create("m_env",this);
 	endfunction
 
-	virtual task run(); endtask
+	virtual task run(); // {
+		fetch_bseq bseq = new("bseq");
+		bseq.start();
+	endtask // }
 
 	task main_phase (uvm_phase phase); // {
 		run();
