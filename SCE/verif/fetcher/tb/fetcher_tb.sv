@@ -10,6 +10,11 @@
 `ifndef fetcher_tb__sv
 `define fetcher_tb__sv
 
+
+`include "uvm_macros.svh"
+
+import uvm_pkg::*;
+
 module fetcher_tb; // {
 
 
