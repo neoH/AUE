@@ -1,0 +1,11 @@
+-incdir $UVM_HOME/
+$UVM_HOME/dpi/uvm_dpi.cc
+$UVM_HOME/uvm.sv
+head_import.svh
+
+child_component.svh
+parent_component.svh
+my_object.svh
+my_component.svh
+
+tb_top.sv
