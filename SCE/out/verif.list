@@ -5,5 +5,9 @@ $UVM_HOME/sv/src/uvm.sv
 ../verif/fetcher/component/fetch_agt/fetch_pkg.sv
 
 ../verif/fetcher/env/head_import.svh
+
+../verif/fetcher/sequences/fetch_bseq.svh
 ../verif/fetcher/env/top_env.svh
 ../verif/fetcher/test/fetch_base_test.svh
+
+../verif/fetcher/tb/fetcher_tb.sv

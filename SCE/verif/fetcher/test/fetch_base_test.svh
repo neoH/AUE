@@ -15,10 +15,10 @@ class fetch_base_test extends uvm_test; // {
 
 	top_env m_env;
 
-	`uvm_component_utils(top_env)
+	`uvm_component_utils(fetch_base_test)
 
 
-	function new (string name = "top_env", uvm_component parent = null);
+	function new (string name = "fetch_base_test", uvm_component parent = null);
 		super.new(name,parent);
 	endfunction
 

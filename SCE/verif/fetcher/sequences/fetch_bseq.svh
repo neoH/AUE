@@ -10,7 +10,6 @@
 `ifndef fetch_bseq__svh
 `define fetch_bseq__svh
 
-typedef class fetch_seqr;
 
 class fetch_bseq extends uvm_sequence; // {
 
@@ -19,12 +18,14 @@ class fetch_bseq extends uvm_sequence; // {
 	fetch_seq_item SEQ;
 
 
-	`uvm_object_begin(uvm_sequence)
-	`uvm_object_end
+	`uvm_object_utils_begin(fetch_bseq)
+	`uvm_object_utils_end
 
-	function fetch_seqr __get_default_seqr(); // {
-		fetch_seqr seqr = uvm_factory::find_wrapper_by_name("fetch_seqr");
-		if (seqr == null) begin uvm_report_fatal("NSEQR","cannot get default sequencer for fetch_bseq");
+	function fetch_pkg::fetch_seqr __get_default_seqr(); // {
+		uvm_factory factor = uvm_factory::get();
+		fetch_pkg::fetch_seqr seqr;
+		$cast (seqr,factor.find_by_name("fetch_seqr"));
+		if (seqr == null) uvm_report_fatal("NSEQR","cannot get default sequencer for fetch_bseq");
 		return seqr;
 	endfunction // }
 
@@ -32,18 +33,22 @@ class fetch_bseq extends uvm_sequence; // {
 		super.new(name);
 	endfunction
 
-	virtual task start (uvm_sequencer seqr = null); // {
-		if (seqr == null) begin // {
-			seqr = __get_default_seqr();
+	virtual task start (uvm_sequencer_base sequencer = null,
+		uvm_sequence_base parent_sequence = null,
+		int this_priority = -1,
+		bit call_pre_post = 1); // {
+		fetch_pkg::fetch_seqr default_seqr;
+		if (sequencer == null) begin // {
+			default_seqr = __get_default_seqr();
+			super.start(default_seqr);
 		end // }
-		super.start(seqr);
+		return;
 	endtask // }
 
 	task body(); // {
 		SEQ = new("seq");
-		SEQ.start_item();
-		SEQ.start();
-		SEQ.end_item();
+		start_item(SEQ);
+		finish_item(SEQ);
 	endtask // }
 
 
