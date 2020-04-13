@@ -1,0 +1,10 @@
+-incdir $UVM_HOME/sv/src
+$UVM_HOME/sv/src/dpi/uvm_dpi.cc
+$UVM_HOME/sv/src/uvm.sv
+head_import.svh
+
+
+ext_env.svh
+ext_test.svh
+
+tb_top.sv
