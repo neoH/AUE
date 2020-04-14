@@ -4,6 +4,7 @@ $UVM_HOME/sv/src/uvm.sv
 head_import.svh
 
 
+ext_uvm_phase.svh
 ext_env.svh
 ext_test.svh
 

@@ -10,7 +10,7 @@
 `ifndef ext_test__svh
 `define ext_test__svh
 
-class ext_test extends uvm_test; // {
+class ext_test extends my_test; // {
 
 	ext_env m_env;
 
@@ -29,12 +29,18 @@ class ext_test extends uvm_test; // {
 
 	extern function void phase_start (uvm_phase phase);
 
+	function void post_build_phase (uvm_phase phase); // {
+		uvm_report_info(get_type_name(),"entering post_build_phase ... ...");
+	endfunction // }
+
+
 endclass // }
 
 
 function void ext_test::build_phase (uvm_phase phase); // {{{
 	super.build_phase(phase);
 	m_env = ext_env::type_id::create("m_env",this);
+
 endfunction // }}}
 
 

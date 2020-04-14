@@ -10,18 +10,40 @@
 `ifndef ext_uvm_phase__svh
 `define ext_uvm_phase__svh
 
-class ext_phase extends uvm_topdown_phase; // {
+class my_component extends uvm_component; // {
+	virtual function void post_build_phase (uvm_phase phase); endfunction
+
+	function new (string name ="my_component", uvm_component parent = null); // {
+		super.new(name,parent);
+	endfunction // }
+
+endclass // }
+
+class my_test extends my_component; // {
+	function new (string name ="my_test", uvm_component parent = null); // {
+		super.new(name,parent);
+	endfunction // }
+
+	
+endclass // }
+
+
+
+class my_post_build_phase extends uvm_topdown_phase; // {
    virtual function void exec_func(uvm_component comp, uvm_phase phase);
-      comp.build_phase(phase); 
+   	my_component ncomp;
+	// only execute post_build_phase for compatible components
+	if ($cast(ncomp,comp)) 
+		ncomp.post_build_phase(phase); 
    endfunction
-   local static ext_phase m_inst;
-   static const string type_name = "ext_phase";
-   static function ext_phase get();
+   local static my_post_build_phase m_inst;
+   static const string type_name = "my_post_build_phase";
+   static function my_post_build_phase get();
       if(m_inst == null)
          m_inst = new();
       return m_inst; 
    endfunction
-   protected function new(string name="ext");
+   protected function new(string name="post_build");
       super.new(name); 
    endfunction
    virtual function string get_type_name();
@@ -29,50 +51,6 @@ class ext_phase extends uvm_topdown_phase; // {
    endfunction
 
 endclass // }
-
-
-class ext_uvm_phase extends uvm_component; // {
-
-	uvm_phase up;
-
-	`uvm_component_utils_begin(ext_uvm_phase)
-	`uvm_component_utils_end
-
-
-	function new (string name = "ext_uvm_phase", uvm_component parent = null);
-		super.new(name,parent);
-	endfunction
-
-	task test_00(); // {
-		up = new("up");
-	endtask // }
-
-	extern function void build_phase(uvm_phase phase);
-	extern function void connect_phase(uvm_phase phase);
-	extern task reset_phase(uvm_phase phase);
-	extern task main_phase(uvm_phase phase);
-
-endclass // }
-
-
-function void ext_uvm_phase::build_phase (uvm_phase phase); // {{{
-	super.build_phase(phase);
-endfunction // }}}
-
-
-function void ext_uvm_phase::connect_phase (uvm_phase phase); // {{{
-	super.connect_phase(phase);
-endfunction // }}}
-
-
-task ext_uvm_phase::reset_phase (uvm_phase phase); // {{{
-	
-endtask // }}}
-
-
-task ext_uvm_phase::main_phase (uvm_phase phase); // {{{
-	
-endtask // }}}
 
 
 `endif

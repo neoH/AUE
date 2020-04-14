@@ -16,6 +16,10 @@ module tb_top; // {
 
 
 	initial begin // {
+		// post_build_phase phase inserting
+		uvm_domain cd = uvm_domain::get_common_domain();
+		cd.add(my_post_build_phase::get(),/*null with_phase*/,
+			cd.find(uvm_build_phase::get()),cd.find(uvm_connect_phase::get()));
 		run_test();
 	end // }
 
