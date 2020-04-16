@@ -1,0 +1,17 @@
+the report error mask feature.
+this example shows how to mask a certain UVM_ERROR according to the ID, and the corresponding error
+will not continue to be display after masked. And certainly, it will not contribute to the
+MAX_QUIT_COUNT
+
+methods to achieve the target:
+1. by overriding the severity of the certain ID, this seems can only mask a certain ID within a
+certain component
+
+2. by setting uvm_report_handler.set_severity_id_action. As above method, when you call this method
+directly by a component's m_rh, it can only setting within this component, however, for normal
+usage, there's a way to set actions within all commponents by calling uvm_root's
+set_report_severity_id_action. Because we often report message by using the global
+uvm_report_<severity>, which is called by uvm_root's uvm_report_<severity> functions. Before doing
+like this, please pay attention that we must explicitly use uvm_root's uvm_report_<severity>, the default
+uvm_report_<severity> is from the component itself
+
