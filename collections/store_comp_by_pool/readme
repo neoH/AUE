@@ -1,0 +1,8 @@
+# store component by uvm_pool
+this example shows a typical usage of uvm_pool, by binding a component with the specific KEY, you
+can setting into a certain handle of the corresponding component, and get it with the specific KEY
+anywhere you want.
+
+this example will set a component in the ext_test level, and get it by uvm_pool from a lower level
+called ext_env, thus demostrates that we can access a component handle regardlessly with the
+hierarchy.
