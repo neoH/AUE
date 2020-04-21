@@ -17,11 +17,12 @@
 #
 #
 # tasks:
-# - get_type(), a static function, if my_type == null, then construct a new one, else return my_type
 #
 # functions:
+# - get_type(), a static function, if my_type == null, then construct a new one, else return my_type
 # - string convert2string(), translate the 'val' in class into "(<type>) <value>" string format.
 # - set(), get handle from uvm_resource_pool, and then call the pool's set
+# - get_type_handle(), return get_type
 #
 #
 #
@@ -31,9 +32,13 @@
 # fields:
 # - static bit m_has_wildcard_names,
 # - static local uvm_resource_pool rp = get()
-# - uvm_queue#(uvm_resource_base) rtab[string]
-# - uvm_queue#(uvm_resource_base) ttab[uvm_resource_base]
+# - uvm_queue#(uvm_resource_base) rtab[string], an array of uvm_queue#(uvm_resource_base), index is
+# the name when constructed, a new one will be added when calling set_scope
+# - uvm_queue#(uvm_resource_base) ttab[uvm_resource_base], an array of
+# uvm_queue#(uvm_resource_base), index is handle of uvm_resource_base type and its extends.
 # - get_t get_record[$], get_t is a class
+# - static rsrc_info_t ri_tab [uvm_resource_base], rsrc_info_t is a struct which has string scope,
+# int unsigned precedence field.
 #
 #
 #
@@ -51,7 +56,11 @@
 # - get(), if rp is null, then construct a new rp, else return rp
 # - local function new(), do nothing
 # - spell_check(string s), TODO, call other functions in other class
-# - set()
+# - set(), only valid when enable deprecated api, TODO
+# - set_scope(uvm_resource_base rsrc, string scope), setting scope to ri_tab[rsrc], if the scope has
+# some char like "scope*", it will be translated to the formal regular expression, and then stored
+# into ri_tab[rsrc]
+# - get_default_precedence(), TODO
 #
 #
 #
