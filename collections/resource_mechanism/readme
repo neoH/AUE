@@ -1,0 +1,59 @@
+# sticky note for learning resource mechanism
+#
+
+
+# uvm_resource_base, a virtual class extends from uvm_object.
+#
+
+
+
+# uvm_resource #(type T) extends uvm_resource_base
+# macros: UVM_USE_RESOURCE_CONVERTER, this indicates the UVM source to use RESOURCE converter
+# instead of others ## TBD
+#
+# fields:
+# - static uvm_resource#(T) my_type = get_type();
+# - protected T val;
+#
+#
+# tasks:
+# - get_type(), a static function, if my_type == null, then construct a new one, else return my_type
+#
+# functions:
+# - string convert2string(), translate the 'val' in class into "(<type>) <value>" string format.
+# - set(), get handle from uvm_resource_pool, and then call the pool's set
+#
+#
+#
+# class uvm_resource_pool, an independent class.
+# 
+#
+# fields:
+# - static bit m_has_wildcard_names,
+# - static local uvm_resource_pool rp = get()
+# - uvm_queue#(uvm_resource_base) rtab[string]
+# - uvm_queue#(uvm_resource_base) ttab[uvm_resource_base]
+# - get_t get_record[$], get_t is a class
+#
+#
+#
+#
+#
+# tasks:
+#
+#
+#
+#
+#
+#
+#
+# functions:
+# - get(), if rp is null, then construct a new rp, else return rp
+# - local function new(), do nothing
+# - spell_check(string s), TODO, call other functions in other class
+# - set()
+#
+#
+#
+#
+#
