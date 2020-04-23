@@ -5,7 +5,7 @@ list := run.list
 tar_list := ../${simdir}/${list}
 
 all: ${tar_list}
-	cp ${list} ../${simdir}
+	mv ${list} ../${simdir}
 
 ${tar_list}:
 	realpath *.sv* > ${list}
