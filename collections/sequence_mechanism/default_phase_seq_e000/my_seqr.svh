@@ -9,4 +9,17 @@
 
 `ifndef my_seqr__svh
 `define my_seqr__svh
+
+class my_seqr extends uvm_sequencer #(my_req,my_rsp); // {
+
+
+	`uvm_component_utils(my_seqr)
+
+	function new (string name = "my_seqr", uvm_component parent = null); // {
+		super.new(name,parent);
+	endfunction // }
+
+endclass // }
+
+
 `endif

@@ -9,4 +9,41 @@
 
 `ifndef my_test__svh
 `define my_test__svh
+
+class my_test extends uvm_test; // {
+
+
+	my_env m_env;
+
+	my_main_seq main_seq;
+
+	`uvm_component_utils(my_test)
+
+	function new (string name = "my_test", uvm_component parent = null); // {
+		super.new(name,parent);
+	endfunction // }
+
+	extern function void build_phase (uvm_phase phase);
+
+endclass // }
+
+function void my_test::build_phase (uvm_phase phase); // {
+	super.build_phase(phase);
+
+	m_env = my_env::type_id::create("m_env",this);
+
+	main_seq = new("main_seq");
+
+	// set default main_phase sequence
+	uvm_config_db #(my_main_seq)::set({get_full_name(),"m_env.m_seqr.main_phase"},
+		"","default_sequence",main_seq
+	);
+endfunction // }
+
+task my_test::main_phase (uvm_phase phase); // {
+	
+endtask // }
+
+
+
 `endif

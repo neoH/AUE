@@ -17,10 +17,13 @@ class my_req extends uvm_sequence_item; // {
 	bit is_write;
 	bit [31:0] WD;
 
+	int unsigned delayCyc; // delay cycle
+
 	`uvm_object_utils_begin(my_req)
 		`uvm_field_int(PA,UVM_ALL_ON)
 		`uvm_field_int(is_write,UVM_ALL_ON)
 		`uvm_field_int(WD,UVM_ALL_ON)
+		`uvm_field_int(delayCyc,UVM_ALL_ON|UVM_NOCOMPARE)
 	`uvm_object_utils_end
 
 	function new (string name ="my_req"); // {

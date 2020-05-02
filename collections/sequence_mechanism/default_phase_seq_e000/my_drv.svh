@@ -25,12 +25,23 @@ class my_drv #(type IF = null) extends uvm_driver #(my_req,my_rsp); // {
 
 
 	// 
-	function void m_drvieAllX(); // {
-	endfunction // }
+	task m_driveAllX(); // {
+		vif.WRITE = 1'bx;
+		vif.SEL   = 1'bx;
+		vif.ADDR  = 'hx;
+		vif.WDATA = 'hx;
+	endtask // }
 
-	function void m_driveAllDef(); // {
-	endfunction // }
+	task m_driveAllDef(); // {
+		vif.WRITE <= 1'b0;
+		vif.SEL   <= 1'b0;
+		vif.ADDR  <= 'h0;
+		vif.WDATA <= 'h0;
+	endtask // }
 
+
+	extern task m_req_drive(bit [31:0] A, bit W, bit [31:0] D);
+	extern task m_delayCyc (input int unsigned Cyc);
 
 
 	function void build_phase (uvm_phase phase); super.build_phase(phase); endfunction
@@ -51,6 +62,7 @@ class my_drv #(type IF = null) extends uvm_driver #(my_req,my_rsp); // {
 		m_driveAllX(); // drive all signal to this device to X value
 
 		wait(vif.RSTN === 1'b1); // wait reset done
+		@(vif.cb);
 		m_driveAllDef(); // drive all output signal of this device to default value
 
 		phase.drop_objection(this);
@@ -62,12 +74,36 @@ class my_drv #(type IF = null) extends uvm_driver #(my_req,my_rsp); // {
 			// here is normal running phase
 			seq_item_port.get_next_item(req);
 
+			if (req.delayCyc) m_delayCyc(req.delayCyc);
+			m_req_drive(req.PA,req,is_write,req.WD);
+
 			seq_item_port.item_done();
 		end // }
 	endtask // }
 
 
 endclass // }
+
+task my_drv:m_delayCyc (int unsigned Cyc); // {
+	repeat (Cyc) @(vif.cb);
+endtask // }
+
+
+task my_drv::m_req_drive(bit [31:0] A, bit W, bit [31:0] D); // {
+	vif.ADDR  <= A;
+	vif.WDATA <= D;
+	vif.WRITE <= W;
+	vif.SEL   <= 'b1;
+
+	@(vif.cb);
+	vif.ADDR  <= 'h0;
+	vif.SEL   <= 'b0;
+	vif.WRITE <= 'b0;
+	vif.WDATA <= 'h0;
+
+	// if need receive response, now start processing from here
+	// TODO
+endtask // }
 
 
 

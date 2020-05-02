@@ -15,6 +15,20 @@ interface my_if(); // {
 
 	logic CLK,RSTN;
 
+	// request channel
+	logic [31:0] ADDR;
+	logic [31:0] WDATA;
+	logic WRITE;
+	logic SEL;
+
+	// response channel
+	// response must be returned next cycle of the request
+	logic [31:0] RDATA;
+	logic OKAY;
+
+	clocking cb @(posedge CLK); // {
+	endclocking // }
+
 endinterface // }
 
 `endif
