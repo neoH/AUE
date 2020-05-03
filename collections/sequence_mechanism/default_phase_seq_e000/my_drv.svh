@@ -11,10 +11,10 @@
 `define my_drv__svh
 
 
-class my_drv #(type IF = null) extends uvm_driver #(my_req,my_rsp); // {
+class my_drv extends uvm_driver #(my_req,my_rsp); // {
 
 
-	virtual IF vif;
+	virtual my_if vif;
 
 
 	`uvm_component_utils(my_drv)
@@ -48,7 +48,7 @@ class my_drv #(type IF = null) extends uvm_driver #(my_req,my_rsp); // {
 
 	function void connect_phase (uvm_phase phase); // {
 		super.connect_phase(phase);
-		uvm_resource_db #(virtual IF)::find_by_name("","","MY_IF",vif);
+		void'(uvm_resource_db #(virtual my_if)::read_by_name("","MY_IF",vif));
 	endfunction // }
 
 
@@ -75,7 +75,7 @@ class my_drv #(type IF = null) extends uvm_driver #(my_req,my_rsp); // {
 			seq_item_port.get_next_item(req);
 
 			if (req.delayCyc) m_delayCyc(req.delayCyc);
-			m_req_drive(req.PA,req,is_write,req.WD);
+			m_req_drive(req.PA,req.is_write,req.WD);
 
 			seq_item_port.item_done();
 		end // }
@@ -84,7 +84,7 @@ class my_drv #(type IF = null) extends uvm_driver #(my_req,my_rsp); // {
 
 endclass // }
 
-task my_drv:m_delayCyc (int unsigned Cyc); // {
+task my_drv::m_delayCyc (int unsigned Cyc); // {
 	repeat (Cyc) @(vif.cb);
 endtask // }
 

@@ -10,6 +10,8 @@
 `ifndef my_trans__svh
 `define my_trans__svh
 
+`include "uvm_macros.svh"
+import uvm_pkg::*;
 
 class my_req extends uvm_sequence_item; // {
 

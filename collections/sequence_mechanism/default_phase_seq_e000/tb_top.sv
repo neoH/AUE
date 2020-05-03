@@ -11,10 +11,21 @@
 `define tb_top__sv
 
 
-`include "uvm_macros.svh"
+//`include "uvm_macros.svh"
 
 module tb_top; // {
+	//import uvm_pkg::*;
 
+	my_if mif();
+
+	initial begin // {
+		run_test("my_test");
+	end // }
+
+
+	initial begin // {
+		uvm_resource_db #(virtual my_if)::set_override_type("","MY_IF",mif);
+	end // }
 
 
 

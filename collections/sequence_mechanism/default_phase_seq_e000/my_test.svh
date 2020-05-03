@@ -24,6 +24,7 @@ class my_test extends uvm_test; // {
 	endfunction // }
 
 	extern function void build_phase (uvm_phase phase);
+	extern task main_phase (uvm_phase phase);
 
 endclass // }
 
@@ -35,8 +36,8 @@ function void my_test::build_phase (uvm_phase phase); // {
 	main_seq = new("main_seq");
 
 	// set default main_phase sequence
-	uvm_config_db #(my_main_seq)::set({get_full_name(),"m_env.m_seqr.main_phase"},
-		"","default_sequence",main_seq
+	uvm_config_db #(my_main_seq)::set(this,"m_env.m_seqr.main_phase",
+		"default_sequence",main_seq
 	);
 endfunction // }
 

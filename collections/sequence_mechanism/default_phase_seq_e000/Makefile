@@ -4,9 +4,6 @@ simdir := out
 list := run.list
 tar_list := ../${simdir}/${list}
 
-all: ${tar_list}
-	mv ${list} ../${simdir}
+all: ${list}
+	cp ${list} ../${simdir}/${list}
 
-${tar_list}:
-	realpath *.sv* > ${list}
-	sort ${list} -o ${list}
