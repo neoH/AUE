@@ -54,6 +54,7 @@ class my_drv extends uvm_driver #(my_req,my_rsp); // {
 
 
 	task reset_phase (uvm_phase phase); // {
+		`uvm_info("RESET","entering reset_phase ... ...", UVM_LOW)
 		super.reset_phase(phase);
 
 		phase.raise_objection(this);
@@ -66,6 +67,7 @@ class my_drv extends uvm_driver #(my_req,my_rsp); // {
 		m_driveAllDef(); // drive all output signal of this device to default value
 
 		phase.drop_objection(this);
+		`uvm_info("RESET","leaving reset_phase ... ...", UVM_LOW)
 
 	endtask // }
 

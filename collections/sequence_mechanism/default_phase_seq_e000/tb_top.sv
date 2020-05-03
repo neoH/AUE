@@ -27,6 +27,14 @@ module tb_top; // {
 		uvm_resource_db #(virtual my_if)::set_override_type("","MY_IF",mif);
 	end // }
 
+	initial begin // {
+		mif.RSTN = 1'b0;
+		mif.CLK  = 1'b0;
+		#500ns;
+		mif.RSTN = 1'b1;
+	end // }
+
+	always #5ns mif.CLK <= ~mif.CLK;
 
 
 endmodule // }

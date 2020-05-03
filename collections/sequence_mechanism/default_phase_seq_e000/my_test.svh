@@ -24,6 +24,7 @@ class my_test extends uvm_test; // {
 	endfunction // }
 
 	extern function void build_phase (uvm_phase phase);
+	extern task reset_phase(uvm_phase phase);
 	extern task main_phase (uvm_phase phase);
 
 endclass // }
@@ -36,13 +37,25 @@ function void my_test::build_phase (uvm_phase phase); // {
 	main_seq = new("main_seq");
 
 	// set default main_phase sequence
-	uvm_config_db #(my_main_seq)::set(this,"m_env.m_seqr.main_phase",
-		"default_sequence",main_seq
-	);
+	uvm_config_db #(uvm_sequence_base)::set(this,"m_env.m_seqr.main_phase",
+		"default_sequence",main_seq);
 endfunction // }
 
+task my_test::reset_phase(uvm_phase phase); // {
+	`uvm_info("RESET","entering reset_phase ...", UVM_LOW)
+	phase.raise_objection(this);
+	#200ns;
+	phase.drop_objection(this);
+	`uvm_info("RESET","leaving reset_phase ...", UVM_LOW)
+endtask // }
+
+
 task my_test::main_phase (uvm_phase phase); // {
-	
+	`uvm_info("MAIN","entering main_phase ...", UVM_LOW)
+	phase.raise_objection(this);
+	#500ns;
+	phase.drop_objection(this);
+	`uvm_info("MAIN","leaving main_phase ...", UVM_LOW)
 endtask // }
 
 
