@@ -1,0 +1,9 @@
+../../default_phase_seq_e000/my_if.sv
+../../default_phase_seq_e000/my_trans.svh
+../../default_phase_seq_e000/my_main_seq.svh
+../../default_phase_seq_e000/my_drv.svh
+../../default_phase_seq_e000/my_seqr.svh
+../../default_phase_seq_e000/my_env.svh
+../../default_phase_seq_e000/my_test.svh
+../../default_phase_seq_e000/my_dut.sv
+../../default_phase_seq_e000/tb_top.sv
