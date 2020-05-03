@@ -14,8 +14,10 @@ class my_test extends uvm_test; // {
 
 
 	my_env m_env;
+	virtual my_if  vif;
 
 	my_main_seq main_seq;
+	bit m_reset_e = 1'b0;
 
 	`uvm_component_utils(my_test)
 
@@ -24,10 +26,20 @@ class my_test extends uvm_test; // {
 	endfunction // }
 
 	extern function void build_phase (uvm_phase phase);
+	extern function void connect_phase(uvm_phase phase);
 	extern task reset_phase(uvm_phase phase);
 	extern task main_phase (uvm_phase phase);
 
 endclass // }
+
+function void my_test::connect_phase (uvm_phase phase); // {
+	super.connect_phase(phase);
+	if (!(uvm_resource_db #(virtual my_if)::read_by_name("","MY_IF",vif))) begin // {
+		`uvm_fatal("FATAL","cannot get interface in my_test")
+	end // }
+
+endfunction // }
+
 
 function void my_test::build_phase (uvm_phase phase); // {
 	super.build_phase(phase);
@@ -51,9 +63,16 @@ endtask // }
 
 
 task my_test::main_phase (uvm_phase phase); // {
+	uvm_domain domain = uvm_domain::get_common_domain();
 	`uvm_info("MAIN","entering main_phase ...", UVM_LOW)
 	phase.raise_objection(this);
-	#500ns;
+	if (~m_reset_e) begin // {
+		wait(vif.RSTN === 1'b0);
+		m_reset_e = 1'b1;
+		`uvm_info("DEBUG","reset start triggered, jump phases",UVM_LOW)
+		domain.jump(uvm_reset_phase::get());
+	// }
+	end else #500ns;
 	phase.drop_objection(this);
 	`uvm_info("MAIN","leaving main_phase ...", UVM_LOW)
 endtask // }

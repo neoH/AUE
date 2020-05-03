@@ -32,6 +32,10 @@ module tb_top; // {
 		mif.CLK  = 1'b0;
 		#500ns;
 		mif.RSTN = 1'b1;
+		#2000ns;
+		mif.RSTN = 1'b0;
+		#300ns;
+		mif.RSTN = 1'b1;
 	end // }
 
 	always #5ns mif.CLK <= ~mif.CLK;
