@@ -30,7 +30,8 @@ class ext_test extends my_test; // {
 	extern function void phase_start (uvm_phase phase);
 
 	function void post_build_phase (uvm_phase phase); // {
-		uvm_report_info(get_type_name(),"entering post_build_phase ... ...");
+		`uvm_info(get_type_name(),"entering post_build_phase ... ...",UVM_LOW);
+		`uvm_info(get_type_name(),"leaving post_build_phase ... ...",UVM_LOW);
 	endfunction // }
 
 
