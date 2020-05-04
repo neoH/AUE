@@ -1,0 +1,5 @@
+../../sequence_item_e001/head_import.svh
+../../sequence_item_e001/ext_uvm_phase.svh
+../../sequence_item_e001/ext_env.svh
+../../sequence_item_e001/ext_test.svh
+../../sequence_item_e001/tb_top.sv
