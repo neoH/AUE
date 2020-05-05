@@ -1,0 +1,13 @@
+## simple mechanism of callbacks recording
+
+## `uvm_register_cb(T,CB)
+# for `uvm_register_cb(T,CB), which declares a static local bit as the result for calling
+# uvm_callbacks#(T,CB)::m_register_pair();
+
+## `uvm_do_callbacks(T,CB,METHOD)
+# searching all iterators of specified T, and doing cb.METHOD which cb is a handle of CB from
+# iterator
+
+## uvm_callback_iter
+# it is just a class that calling methods from uvm_callbacks and makes some procedures more easier
+

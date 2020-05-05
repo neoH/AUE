@@ -1,0 +1,10 @@
+../../basic_cb_e000/my_if.sv
+../../basic_cb_e000/my_trans.svh
+../../basic_cb_e000/my_cb.svh
+../../basic_cb_e000/my_main_seq.svh
+../../basic_cb_e000/my_drv.svh
+../../basic_cb_e000/my_seqr.svh
+../../basic_cb_e000/my_env.svh
+../../basic_cb_e000/my_test.svh
+../../basic_cb_e000/my_dut.sv
+../../basic_cb_e000/tb_top.sv
