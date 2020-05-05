@@ -1,0 +1,9 @@
+../../put_port_e000/my_if.sv
+../../put_port_e000/my_trans.svh
+../../put_port_e000/my_main_seq.svh
+../../put_port_e000/my_drv.svh
+../../put_port_e000/my_seqr.svh
+../../put_port_e000/my_env.svh
+../../put_port_e000/my_test.svh
+../../put_port_e000/my_dut.sv
+../../put_port_e000/tb_top.sv

@@ -1,0 +1,10 @@
+## learning notes here
+#
+
+
+## uvm_if_base_abstract
+# support virtual methods for derived classes
+
+
+## uvm_tlm_if_base
+# provide virtual methods for different ports, imps
