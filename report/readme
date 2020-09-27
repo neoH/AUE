@@ -1,0 +1,7 @@
+all report features in one environment, cases:
+- report_error_max_quit_cnt
+case to set a special max_quit_cnt value, and the count increment will be triggered only by ERROR
+- report_warn_max_quit_cnt
+case to set a special max_quit_cnt value, and add warning report to be one of the report that will
+trigger the increment
+-
