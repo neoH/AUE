@@ -1,7 +1,20 @@
 all report features in one environment, cases:
+
 - report_error_max_quit_cnt
 case to set a special max_quit_cnt value, and the count increment will be triggered only by ERROR
+2 ways to set the max quit count, one is by calling report server's set_max_quit_count(<num>,<ovrd>)
+second is by a command option: +UVM_MAX_QUIT_COUNT=<num>,<ovrd>
+attention: the ovrd bit will make the max quit count not overridable by next call of
+set_max_quit_count, not current call.
+
 - report_warn_max_quit_cnt
 case to set a special max_quit_cnt value, and add warning report to be one of the report that will
 trigger the increment
--
+
+- report_proc_report_message
+override the report message function in report server, can add a virtual function such as
+pre_proc_report_message, or post_proc_report_message, to custmize the original report message
+function
+
+- report_log_spid
+choose to log files of specific report ID.

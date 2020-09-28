@@ -13,6 +13,11 @@ include phase/make_case.lst
 # sim dir
 sim := sim
 
+ext :=
+
+# the list command, use to list all available tests
+list:
+	echo listing commands, if nothing happen, you should specify which part to display
 
 
 # start runing examples
@@ -22,7 +27,7 @@ $(cases):
 	if [ ! -d $(sim) ]; then \
 		mkdir $(sim); \
 	fi; \
-	cd $(sim); ../script/sim.pl $@;
+	cd $(sim); ../script/sim.pl $@ $(ext);
 
 
 
@@ -35,9 +40,6 @@ else
 list_cases = $(filter $(list_filter)%,$(cases))
 endif
 
-# the list command, use to list all available tests
-list:
-	echo listing commands
 
 
 $(category):

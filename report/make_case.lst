@@ -1,5 +1,8 @@
 ## category
 category += report
 
-cases += report_summary_overload
+cases += report_summary_overload \
+report_error_max_quit_cnt \
+report_warn_max_quit_cnt \
+report_proc_report_message
 

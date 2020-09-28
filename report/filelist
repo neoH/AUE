@@ -3,3 +3,6 @@
 
 // cases
 ../report/cases/report_summary_overload.sv
+../report/cases/report_error_max_quit_cnt.sv
+../report/cases/report_warn_max_quit_cnt.sv
+../report/cases/report_proc_report_message.sv
