@@ -17,7 +17,8 @@ sub main()
 {
 
 	my $rootD = `pwd`; chomp($rootD);
-	my $case  = shift(@ARGV);
+	my $case  = shift(@ARGV); # first arg is the case name
+	my $ext   = shift(@ARGV); # second as the extra EDA args
 	my $simc  = "xrun -64bit";
 
 	$rootD = dirname($rootD);
@@ -32,6 +33,7 @@ sub main()
 	$simc .= " -uvmnoautocompile -incdir $ENV{UVM_HOME}/sv/src $ENV{UVM_HOME}/sv/src/dpi/uvm_dpi.cc $ENV{UVM_HOME}/sv/src/uvm.sv";
 	$simc .= " -incdir $home -f $home/filelist";
 	$simc .= " -errormax 1 -access rwc -timescale 1ns/1ps +UVM_TESTNAME=$case";
+	$simc .= " $ext";
 
 	#print $simc,"\n";
 	
