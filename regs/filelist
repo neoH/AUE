@@ -1,0 +1,10 @@
+// rtl
+../regs/rtl/
+// TODO
+
+// bench
+../regs/pkg.sv
+../regs/env/tb/tb_top.sv
+
+// cases
+// TODO
