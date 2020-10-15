@@ -4,6 +4,7 @@ category := all
 
 include report/make_case.lst
 include phase/make_case.lst
+include regs/make_case.lst
 
 # add cases here
 
@@ -17,7 +18,10 @@ ext :=
 
 # the list command, use to list all available tests
 list:
-	echo listing commands, if nothing happen, you should specify which part to display
+	echo listing commands, if nothing happen, you should specify which part to display:
+	echo ""
+	echo $(filter-out all,$(category))
+	echo ""
 
 
 # start runing examples
